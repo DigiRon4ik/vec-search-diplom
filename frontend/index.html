@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VecMarket — Семантический маркетплейс</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="logo" id="logo">Vec<span>Market</span></a>
+      <form id="search-form" class="search-form">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input type="text" id="query" placeholder="Семантический поиск товаров..." autocomplete="off" />
+          <button type="button" id="clear-btn" class="clear-btn hidden" title="Очистить">&times;</button>
+        </div>
+        <button type="submit" class="search-btn">Найти</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="main">
+    <aside class="sidebar" id="sidebar">
+      <h3 class="sidebar-title">Категории</h3>
+      <ul class="cat-list" id="cat-list">
+        <li><button class="cat-btn active" data-category="">Все</button></li>
+      </ul>
+    </aside>
+
+    <section class="content">
+      <div class="content-header" id="content-header">
+        <h2 id="page-title">Каталог товаров</h2>
+        <span class="badge" id="total-badge"></span>
+      </div>
+
+      <div class="grid" id="grid"></div>
+
+      <div class="loader" id="loader">
+        <div class="spinner"></div>
+        <span>Загрузка...</span>
+      </div>
+
+      <div class="end-msg hidden" id="end-msg">Все товары загружены</div>
+
+      <div id="sentinel" class="sentinel"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: catalog
+      POSTGRES_PASSWORD: catalog_secret
+      POSTGRES_DB: catalog
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U catalog"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    networks:
+      - backend
+
+  catalog:
+    build:
+      context: ./services/catalog
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: catalog
+      POSTGRES_PASSWORD: catalog_secret
+      POSTGRES_DB: catalog
+      SEED_FILE: /data/catalog_seed.json
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8081/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - backend
+
+  embedding:
+    build:
+      context: ./services/embedding
+    environment:
+      HF_HOME: /root/.cache/huggingface
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8082/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    networks:
+      - backend
+
+  search:
+    build:
+      context: ./services/search
+    environment:
+      CATALOG_URL: http://catalog:8081
+      EMBEDDING_URL: http://embedding:8082
+    depends_on:
+      catalog:
+        condition: service_healthy
+      embedding:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8083/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    networks:
+      - backend
+
+  gateway:
+    build:
+      context: ./services/gateway
+      additional_contexts:
+        frontend: ./frontend
+    environment:
+      CATALOG_URL: http://catalog:8081
+      EMBEDDING_URL: http://embedding:8082
+      SEARCH_URL: http://search:8083
+    ports:
+      - "8080:8080"
+    depends_on:
+      catalog:
+        condition: service_healthy
+      search:
+        condition: service_healthy
+    networks:
+      - backend
+
+volumes:
+  pgdata:
+  hf_cache:
+
+networks:
+  backend:

@@ -1,0 +1,104 @@
+[
+  {
+    "query": "гаджет для бега и тренировок",
+    "expected_categories": ["Электроника", "Спорт", "Electronics", "Sports"],
+    "lang": "ru"
+  },
+  {
+    "query": "что почитать в отпуске",
+    "expected_categories": ["Книги", "Books"],
+    "lang": "ru"
+  },
+  {
+    "query": "подарок ребёнку на день рождения",
+    "expected_categories": ["Игрушки", "Toys"],
+    "lang": "ru"
+  },
+  {
+    "query": "уход за кожей лица",
+    "expected_categories": ["Красота", "Beauty"],
+    "lang": "ru"
+  },
+  {
+    "query": "тёплая зимняя одежда",
+    "expected_categories": ["Одежда", "Clothing"],
+    "lang": "ru"
+  },
+  {
+    "query": "приготовление еды на кухне",
+    "expected_categories": ["Дом и кухня", "Home & Kitchen"],
+    "lang": "ru"
+  },
+  {
+    "query": "полив растений в саду",
+    "expected_categories": ["Сад и огород", "Garden"],
+    "lang": "ru"
+  },
+  {
+    "query": "аксессуары для автомобиля",
+    "expected_categories": ["Автотовары", "Automotive"],
+    "lang": "ru"
+  },
+  {
+    "query": "здоровые продукты и перекусы",
+    "expected_categories": ["Продукты", "Food"],
+    "lang": "ru"
+  },
+  {
+    "query": "wireless headphones for running",
+    "expected_categories": ["Electronics", "Sports", "Электроника", "Спорт"],
+    "lang": "en"
+  },
+  {
+    "query": "cozy blanket for winter evenings",
+    "expected_categories": ["Home & Kitchen", "Дом и кухня"],
+    "lang": "en"
+  },
+  {
+    "query": "best books about science",
+    "expected_categories": ["Books", "Книги"],
+    "lang": "en"
+  },
+  {
+    "query": "gift ideas for kids",
+    "expected_categories": ["Toys", "Игрушки"],
+    "lang": "en"
+  },
+  {
+    "query": "organic skincare products",
+    "expected_categories": ["Beauty", "Красота"],
+    "lang": "en"
+  },
+  {
+    "query": "garden tools for spring planting",
+    "expected_categories": ["Garden", "Сад и огород"],
+    "lang": "en"
+  },
+  {
+    "query": "наушники для спорта",
+    "expected_categories": ["Электроника", "Спорт", "Electronics", "Sports"],
+    "lang": "ru",
+    "note": "cross-lingual: should find both RU and EN electronics/sports"
+  },
+  {
+    "query": "warm jacket for hiking",
+    "expected_categories": ["Clothing", "Sports", "Одежда", "Спорт"],
+    "lang": "en",
+    "note": "cross-lingual: should find both EN and RU outdoor clothing"
+  },
+  {
+    "query": "smart home devices",
+    "expected_categories": ["Electronics", "Home & Kitchen", "Электроника", "Дом и кухня"],
+    "lang": "en"
+  },
+  {
+    "query": "вкусный и полезный чай",
+    "expected_categories": ["Продукты", "Food"],
+    "lang": "ru"
+  },
+  {
+    "query": "car accessories and tools",
+    "expected_categories": ["Automotive", "Автотовары"],
+    "lang": "en"
+  }
+]
